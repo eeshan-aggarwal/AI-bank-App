@@ -1,0 +1,37 @@
+name: DevSecOps Pipeline
+
+on:
+    # push:
+    #     branches: [docker]
+
+jobs:
+    # CI for AI-Bank-APP
+    code-quality:
+        uses: ./.github/workflows/code-quality.yml
+    
+    dependency-scan:
+        uses: ./.github/workflows/dependency-scan.yml
+
+    secrets-scan:
+        uses: ./.github/workflows/secret-scan.yml
+    
+    docker-linter:
+        uses: ./.github/workflows/docker-linter.yml
+
+    docker-image-build:
+        needs: [code-quality, dependency-scan, secrets-scan, docker-linter]
+        uses: ./.github/workflows/docker-build-and-push.yml
+        secrets: inherit
+
+    image-scan:
+        needs: [docker-image-build]
+        uses: ./.github/workflows/image-scan.yml
+        secrets: inherit
+
+    deploy-to-server:
+        needs: [image-scan]
+        uses: ./.github/workflows/deploy-to-server.yml
+        secrets: inherit
+
+    
+    
