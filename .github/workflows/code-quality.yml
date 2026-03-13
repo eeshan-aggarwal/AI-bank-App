@@ -14,6 +14,14 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
+
+            
+            - name: Start MySQL
+              uses: mirromutth/mysql-action@v1.1
+              with:
+                mysql root password: Test@123
+                mysql database: bankappdb
+                mysql user: root
             
             - name: Set up JDK ${{ matrix.jdk-version }}
               uses: actions/setup-java@v4
