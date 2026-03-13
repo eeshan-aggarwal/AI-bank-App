@@ -21,7 +21,7 @@ jobs:
               uses: mirromutth/mysql-action@v1.1
               with:
                 mysql_database: bankappdb
-                mysql_root password: ${{ secrets.MYSQL_PASSWORD }}
+                mysql_root password: Test@123
 
             - name: Setup JDK version
               uses: actions/setup-java@v4
