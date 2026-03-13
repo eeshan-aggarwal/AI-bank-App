@@ -29,7 +29,7 @@ services:
       - bankapp-net
 
   bankapp:
-    build: .
+    image: eeshan31/github-actions-app:df1fd117ac83b31b6d6837783f145b17512c9dc4
     container_name: bankapp
     ports:
       - "8080:8080"
