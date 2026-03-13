@@ -10,7 +10,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                jdk-version: ['21','22','23']
+                jdk-version: ['17','21']
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -19,22 +19,22 @@ jobs:
             - name: Start MySQL
               uses: mirromutth/mysql-action@v1.1
               with:
-                mysql root password: Test@123
-                mysql database: bankappdb
-                mysql user: root
-            
-            - name: Set up JDK ${{ matrix.jdk-version }}
-              uses: actions/setup-java@v4
-              with:
-                java-version: ${{ matrix.jdk-version }}
-                distribution: 'temurin'
-                cache: maven
-
-            - name: Build with Maven
-              run: mvn --batch-mode --update-snapshots verify
+                mysql_root_password: Test@123
+                mysql_database: bankappdb
 
             - name: Run Linter
               run: mvn checkstyle:check
+            
+            - name: Build with Maven
+              run: mvn clean package
+            
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v3
+              with:
+                languages: java
+
+            - name: Autobuild
+              uses: github/codeql-action/autobuild@v3
 
             - name: Perform CodeQL Analysis
               uses: github/codeql-action/analyze@v3
