@@ -12,6 +12,7 @@ jobs:
     # CI for AI-Bank-APP
     code-quality:
         uses: ./.github/workflows/code-quality.yml
+        secrets: inherit
     
     dependency-scan:
         uses: ./.github/workflows/dependency-scan.yml
