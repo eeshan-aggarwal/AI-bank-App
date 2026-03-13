@@ -3,7 +3,10 @@ name: DevSecOps Pipeline
 on:
     push:
         branches: [docker]
-    
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
     # CI for AI-Bank-APP
