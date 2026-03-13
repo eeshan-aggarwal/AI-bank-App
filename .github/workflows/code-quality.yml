@@ -19,8 +19,8 @@ jobs:
             - name: Start MySQL
               uses: mirromutth/mysql-action@v1.1
               with:
-                mysql_root_password: Test@123
-                mysql_database: bankappdb
+                mysql database: bankappdb
+                mysql root password: Test@123
 
             - name: Run Linter
               run: mvn checkstyle:check
