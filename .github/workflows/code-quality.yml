@@ -1,8 +1,9 @@
 name: Code quality check
 
 on:
-    push:
-        branches: [docker]
+    workflow_call:
+    # push:
+    #     branches: [docker]
 
 permissions:
     security-events: write
@@ -20,7 +21,7 @@ jobs:
               uses: mirromutth/mysql-action@v1.1
               with:
                 mysql database: bankappdb
-                mysql root password: Test@123
+                mysql root password: ${{ secrets.MYSQL_PASSWORD }}
 
             - name: Setup JDK version
               uses: actions/setup-java@v4

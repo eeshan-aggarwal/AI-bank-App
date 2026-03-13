@@ -1,0 +1,17 @@
+name: Docker linter
+
+on:
+    push:
+        branches: [docker]
+
+jobs:
+    validate-Dockerfile:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: action/checkout@v4
+
+        - name: Validate Dockerfile
+          uses: hadolint/hadolint-action@v3.1.0
+          with:
+            dockerfile: Dockerfile.multistage
