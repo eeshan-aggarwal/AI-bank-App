@@ -1,8 +1,9 @@
 name: Docker image scanner
 
 on:
-    push:
-        branches: [docker]
+    # push:
+    #     branches: [docker]
+    workflow_call:
 
 jobs:
     image-scan:

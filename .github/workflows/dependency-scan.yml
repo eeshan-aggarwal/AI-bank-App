@@ -1,0 +1,28 @@
+name: Dependency scan
+
+on:
+    push:
+        branches: [docker]
+
+jobs:
+    dependency-scan:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Setup JDK version
+          uses: actions/setup-java@v4
+          with:
+            java-version: 21
+            distribution: temurin
+
+        - name: Cache OWASP database
+          uses: actions/cache@v4
+          with:
+            path: ~/.m2/repository/org/owasp/dependency-check-data
+            key: owasp-db
+
+        - name: Run OWASP Dependency Check
+          run: |
+            mvn org.owasp:dependency-check-maven:check
