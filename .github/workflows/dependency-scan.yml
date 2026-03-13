@@ -1,8 +1,9 @@
 name: Dependency scan
 
 on:
-    push:
-        branches: [docker]
+    # push:
+    #     branches: [docker]
+    workflow_call:
 
 jobs:
     dependency-scan:
