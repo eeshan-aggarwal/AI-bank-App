@@ -1,8 +1,9 @@
 name: DevSecOps Pipeline
 
 on:
-    # push:
-    #     branches: [docker]
+    push:
+        branches: [docker]
+    
 
 jobs:
     # CI for AI-Bank-APP
