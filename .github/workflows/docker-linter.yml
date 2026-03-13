@@ -1,8 +1,9 @@
 name: Docker linter
 
 on:
-    push:
-        branches: [docker]
+    # push:
+    #     branches: [docker]
+    workflow_call:
 
 jobs:
     validate-Dockerfile:
