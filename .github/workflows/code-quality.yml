@@ -22,6 +22,12 @@ jobs:
                 mysql database: bankappdb
                 mysql root password: Test@123
 
+            - name: Setup JDK version
+              uses: actions/setup-java@v4
+              with:
+                java-version: ${{ matrix.jdk-version }}
+                distribution: temurin
+
             - name: Run Linter
               run: mvn checkstyle:checkstyle
             
