@@ -4,13 +4,13 @@ on:
     push:
         branches: [docker]
 
+permissions:
+    security-events: write
+    contents: read
+
 jobs:
     validate:
         runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                jdk-version: ['17','21']
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
             - name: Setup JDK version
               uses: actions/setup-java@v4
               with:
-                java-version: ${{ matrix.jdk-version }}
+                java-version: 21
                 distribution: temurin
 
             - name: Run Linter
