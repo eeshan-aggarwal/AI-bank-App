@@ -10,9 +10,9 @@ permissions:
 
 jobs:
     # CI for AI-Bank-APP
-    # code-quality:
-    #     uses: ./.github/workflows/code-quality.yml
-    #     secrets: inherit
+    code-quality:
+        uses: ./.github/workflows/code-quality.yml
+        secrets: inherit
     
     dependency-scan:
         uses: ./.github/workflows/dependency-scan.yml
@@ -24,7 +24,7 @@ jobs:
         uses: ./.github/workflows/docker-linter.yml
 
     docker-image-build:
-        needs: [dependency-scan, secrets-scan, docker-linter]
+        needs: [code-quality, dependency-scan, secrets-scan, docker-linter]
         uses: ./.github/workflows/docker-build-and-push.yml
         secrets: inherit
 
@@ -33,10 +33,10 @@ jobs:
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
 
-    # deploy-to-server:
-    #     needs: [image-scan]
-    #     uses: ./.github/workflows/deploy-to-server.yml
-    #     secrets: inherit
+    deploy-to-server:
+        needs: [image-scan]
+        uses: ./.github/workflows/deploy-to-server.yml
+        secrets: inherit
 
     
     
