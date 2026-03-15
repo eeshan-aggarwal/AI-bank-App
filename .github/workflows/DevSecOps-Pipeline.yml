@@ -32,7 +32,6 @@ jobs:
         needs: [docker-image-build]
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
-        trivyignore: ${{ github.workspace }}/.trivyignore
 
     # deploy-to-server:
     #     needs: [image-scan]
