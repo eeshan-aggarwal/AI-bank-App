@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             DOCKER_USERNAME: ${{ vars.DOCKERHUB_USER }}
-            DOCKER_TAG: ${{ github.event.workflow_run.head_sha }}
+            DOCKER_TAG: ${{ github.sha }}
 
         steps:
         - name: checkout code
@@ -42,5 +42,7 @@ jobs:
             key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
             scripts: |
                 echo "Running app"
-                echo ${{ secrets.GITHUB_TOKEN }} | docker login --username $DOCKERHUB_USERNAME --password-stdin
+                export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
+                export DOCKER_TAG=${{ github.sha }}
+                echo ${{ secrets.GITHUB_TOKEN }} | docker login --username ${{ vars.DOCKERHUB_USER }} --password-stdin
                 cd ~/AI-Bank-App && docker compose down && docker compose up -d --build --force-recreate --pull always
