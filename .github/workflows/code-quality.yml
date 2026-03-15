@@ -28,20 +28,18 @@ jobs:
               with:
                 java-version: 21
                 distribution: temurin
+                cache: maven
 
             - name: Run Linter
               run: mvn checkstyle:checkstyle
-            
-            - name: Build with Maven
-              run: mvn clean package
-            
+
             - name: Initialize CodeQL
               uses: github/codeql-action/init@v3
               with:
                 languages: java
-
-            - name: Autobuild
-              uses: github/codeql-action/autobuild@v3
-
+            
+            - name: Build with Maven
+              run: mvn clean package
+            
             - name: Perform CodeQL Analysis
               uses: github/codeql-action/analyze@v3
