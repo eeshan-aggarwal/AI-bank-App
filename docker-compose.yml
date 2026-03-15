@@ -18,15 +18,15 @@ services:
     networks:
       - bankapp-net
 
-  ollama:
-    image: ollama/ollama
-    container_name: bankapp-ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama-data:/root/.ollama
-    networks:
-      - bankapp-net
+  # ollama:
+  #   image: ollama/ollama
+  #   container_name: bankapp-ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+  #   networks:
+  #     - bankapp-net
 
   bankapp:
     image: ${{ vars.DOCKERHUB_USER }}/ai-bank-app:${{ github.sha }}
