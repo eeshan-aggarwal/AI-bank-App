@@ -6,7 +6,7 @@ jobs:
     deploy-to-server:
         runs-on: ubuntu-latest
         env:
-            DOCKER_USERNAME: ${{ vars. DOCKERHUB_USER }}
+            DOCKER_USERNAME: ${{ vars.DOCKERHUB_USER }}
             DOCKER_TAG: ${{ github.event.workflow_run.head_sha }}
 
         steps:
@@ -21,6 +21,8 @@ jobs:
             key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
             scripts: |
                 echo "Creating empty directory"
+                sudo apt-get update && sudo apt-get install docker.io docker-compose-v2 -y
+                sudo usermod -aG docker $USER
                 rm -rf AI-Bank-App && mkdir -p AI-Bank-App
 
         - name: Copy docker compose file
